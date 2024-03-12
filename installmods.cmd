@@ -1,18 +1,23 @@
 @echo off
 setlocal enabledelayedexpansion
-set localver=031224
-echo.Checking for Script updates
-:curver
 mode con:cols=64 lines=18
-cls
+set localver=031324
+set "targetFolder=SteamLibrary\steamapps\common\Baldurs Gate 3"
+set "GOGFolder=GOG GAMES\Baldurs Gate 3"
+
+
+:checkupdate
+echo.Checking for Script updates.
 powershell -c "$data = curl https://api.github.com/repos/mon5termatt/bg3-mods/git/refs/tag -UseBasicParsing | ConvertFrom-Json; $data[-1].ref -replace 'refs/tags/', '' | Out-File -Encoding 'UTF8' -FilePath './curver.ini'"
 set /p remver= < curver.ini
 set remver=%remver:~-6%
 del curver.ini /Q
-if "%localver%" EQU "%remver%" (goto startup)
+if "%localver%" EQU "%remver%" (
+echo.Script is up to date
+goto startup
+)
 
 :updateprogram
-cls
 echo.A new version of the program has been released. The program will now restart.
 curl "https://raw.githubusercontent.com/mon5termatt/bg3-mods/main/update.bat" -o ./update.bat -s -L
 start cmd /k update.bat
@@ -20,15 +25,6 @@ exit
 
 
 :startup
-echo.GOG Installs are untested. 
-echo.While it does have support for it, I dont own the game on GOG 
-::GOG   Library: C:\GOG GAMES\Baldurs Gate 3
-::Steam Library: C:\Program Files (x86)\Steam\steamapps\common
-::Steam Library: C:\Program Files\Steam\steamapps\common
-set "targetFolder=SteamLibrary\steamapps\common\Baldurs Gate 3"
-set "GOGFolder=GOG GAMES\Baldurs Gate 3"
-
-
 if exist "%programfiles(x86)%\Steam\steamapps\common\Baldurs Gate 3\" (
 	echo.Found at "%programfiles(x86)%\Steam\steamapps\common\Baldurs Gate 3"
 	set "gamepath=C:\Program Files (x86)\Steam\steamapps\common\Baldurs Gate 3"
@@ -69,11 +65,15 @@ if not defined gamepath (
 :end_loop 
 cd /D %gamepath%
 
+::pass in a variable from the console to autmoatically select 
 if "%1" == "1" (goto install)
 if "%1" == "2" (goto update)
 if "%1" == "3" (goto remove)
 
+
 :menu
+echo.
+echo.
 ECHO.    [1] [92mINSTALL[37m
 Echo.    [2] REINSTALL/UPDATE
 Echo.    [3] UNINSTALL
@@ -89,7 +89,7 @@ goto remove
 
 :install
 echo Downloading Patch Files.
-curl -# https://cloud.mon5termatt.com/index.php/s/AjYdWRzMcrCR4ob/download/files.zip -o files.zip
+curl -# https://github.com/mon5termatt/bg3-mods/raw/main/files.zip -o files.zip
 powershell -command "Expand-Archive -Force '%gamepath%\files.zip' '%gamepath%'"
 del files.zip
 
@@ -100,7 +100,6 @@ move "%gamepath%\appdata\modsettings.lsx" "%localappdata%\Larian Studios\Baldur'
 
 
 :MPPREP
-
 Set "GetFileName=%gamepath%\bin\bg3.exe"
 if exist "%GetFileName%.backup" (goto askbackup) else (goto MPPATCH)
 
@@ -170,8 +169,3 @@ if "%update%" == "true" (goto install) else (goto exit)
 echo.Press any key to exit.
 pause>nul
 exit
-
-
-
-
-
