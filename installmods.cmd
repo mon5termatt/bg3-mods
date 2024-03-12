@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-set localver=03.12.24
+set localver=031224
 echo.Checking for Script updates
 :curver
 mode con:cols=64 lines=18
