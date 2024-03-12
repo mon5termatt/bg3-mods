@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-mode con:cols=64 lines=18
+mode con:cols=100 lines=18
 set localver=031224
 set "targetFolder=SteamLibrary\steamapps\common\Baldurs Gate 3"
 set "GOGFolder=GOG GAMES\Baldurs Gate 3"
