@@ -7,9 +7,9 @@ mode con:cols=64 lines=18
 cls
 powershell -c "$data = curl https://api.github.com/repos/mon5termatt/bg3-mods/git/refs/tag -UseBasicParsing | ConvertFrom-Json; $data[-1].ref -replace 'refs/tags/', '' | Out-File -Encoding 'UTF8' -FilePath './curver.ini'"
 set /p remver= < curver.ini
-set remver=%remver:~-8%
+set remver=%remver:~-6%
 del curver.ini /Q
-if "%localver%" GEQ "%remver%" (goto startup)
+if "%localver%" EQU "%remver%" (goto startup)
 
 :updateprogram
 cls
