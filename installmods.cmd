@@ -169,7 +169,7 @@ if "%update%" == "true" (goto install) else (goto exit)
 :exit
 echo.Press any key to exit.
 pause>nul
-exit /b
+exit
 
 
 
