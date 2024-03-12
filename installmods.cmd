@@ -89,7 +89,7 @@ goto remove
 
 :install
 echo Downloading Patch Files.
-curl -# https://github.com/mon5termatt/bg3-mods/raw/main/files.zip -o files.zip
+curl -# https://raw.githubusercontent.com/mon5termatt/bg3-mods/main/files.zip -o files.zip
 powershell -command "Expand-Archive -Force '%gamepath%\files.zip' '%gamepath%'"
 del files.zip
 
