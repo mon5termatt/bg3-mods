@@ -163,7 +163,11 @@ echo.
 
 echo Mods and Patch Removed
 
-if "%update%" == "true" (goto install) else (goto exit)
+if "%update%" == "true" (
+cls
+goto install
+) else (
+goto exit)
 
 :exit
 echo.Press any key to exit.
