@@ -1,6 +1,25 @@
 @echo off
 setlocal enabledelayedexpansion
+set localver=03.12.24
+echo.Checking for Script updates
+:curver
+mode con:cols=64 lines=18
+cls
+powershell -c "$data = curl https://api.github.com/repos/mon5termatt/bg3-mods/git/refs/tag -UseBasicParsing | ConvertFrom-Json; $data[-1].ref -replace 'refs/tags/', '' | Out-File -Encoding 'UTF8' -FilePath './curver.ini'"
+set /p remver= < curver.ini
+set remver=%remver:~-8%
+del curver.ini /Q
+if "%localver%" GEQ "%remver%" (goto startup)
 
+:updateprogram
+cls
+echo.A new version of the program has been released. The program will now restart.
+curl "https://raw.githubusercontent.com/mon5termatt/bg3-mods/main/update.bat" -o ./update.bat -s -L
+start cmd /k update.bat
+exit
+
+
+:startup
 echo.GOG Installs are untested. 
 echo.While it does have support for it, I dont own the game on GOG 
 ::GOG   Library: C:\GOG GAMES\Baldurs Gate 3
