@@ -27,9 +27,13 @@ Thats it, you are done. close the script when it saiys that the script has finis
 ## FAQ
 
 Q. i dont trust this.
+
 A. Then dont use it.
 
+
+
 Q. I want to add a mod to the list
+
 A. see attached flowchart
 ![Flowchart](docs/flow.jpeg)
 
