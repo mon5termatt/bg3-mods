@@ -8,7 +8,8 @@
 #### Install Instructions
 
 Step 1. Download the latest release of installmods.cmd on the right ------>
-> <i>If chrome/firefox/edge blocks the download usually you can hit see more and then keep anyways</i>
+> <i>If chrome/firefox/edge blocks the download usually you can hit see more and then keep anyways...<br>
+> also if you use something that isnt those three. why?</i>
 
 Step 2. Run the Batch File. Again if windows blocks it you can hit run anyways. i hate microsoft.
 
@@ -22,20 +23,21 @@ Step 3. Make your selection
 
 Step 4. Wait for the script to finish.
 
-Thats it, you are done. close the script when it saiys that the script has finished.
+Thats it, you are done. close the script when it says that the script has finished.
+
+
+## Advanced users
+
+you can also pass the 1/2/3 into the script as a variable. just run as `installmods.cmd 1` in cmd
+> if you dont know what this means just ignore it. its for people who like to use the command line...
 
 ## FAQ
 
-Q. i dont trust this.
-
-A. Then dont use it.
-
-
-
-Q. I want to add a mod to the list
-
-A. see attached flowchart
-
+Q. I dont trust this.<br>
+A. Then dont use it. you can view the sources...<br>
+<br>
+Q. I want to add a mod to the list<br>
+A. see attached flowchart<br>
 ![Flowchart](docs/flow.jpeg)
 
 
