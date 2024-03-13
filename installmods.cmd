@@ -10,7 +10,7 @@ set "GOGFolder=GOG GAMES\Baldurs Gate 3"
 echo.Checking for Script updates.
 powershell -c "$data = curl https://api.github.com/repos/mon5termatt/bg3-mods/git/refs/tag -UseBasicParsing | ConvertFrom-Json; $data[-1].ref -replace 'refs/tags/', '' | Out-File -Encoding 'UTF8' -FilePath './curver.ini'"
 set /p remver= < curver.ini
-set remver=%remver:~-6%
+set remver=%remver:~-4%
 del curver.ini /Q
 if "%localver%" EQU "%remver%" (
 echo.Script is up to date
