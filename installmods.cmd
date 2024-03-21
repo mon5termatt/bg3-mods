@@ -152,8 +152,11 @@ move "%gamepath%\appdata\modsettings.lsx" "%localappdata%\Larian Studios\Baldur'
 
 
 :MPPREP
+
+if exist ".\bin\bg3.exe.backup" (
 if %mismatch% EQU true (goto mppatch)
 if %mismatch% EQU false (goto skip)
+) else (goto mppatch)
 
 :MPPATCH
 Set "GetFileName=%gamepath%\bin\bg3.exe"
@@ -188,9 +191,6 @@ del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\ShowApprovalRatings -
 del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\NoRomanceLimit.pak"
 del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\PlayerProfiles\Public\modsettings.lsx"
 echo.
-
-
-
 
 if %bg3cur1% EQU %bg3bak1% (
 goto opt2
