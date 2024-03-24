@@ -36,8 +36,24 @@ you can also pass the 1/2/3 into the script as a variable. just run as `installm
 Q. I dont trust this.<br>
 A. Then dont use it. you can view the sources...<br>
 <br>
+Q. Why?<br>
+A. Someone I know doesnt know how to work with computers.<br>
+<br>
 Q. I want to add a mod to the list<br>
 A. see attached flowchart<br>
-![Flowchart](docs/flow.jpeg)
-
-
+![Flowchart](docs/flow.jpeg)<br>
+<br>
+<!--
+Q. <br>
+A. <br>
+<br>
+Q. <br>
+A. <br>
+<br>
+Q. <br>
+A. <br>
+<br>
+Q. <br>
+A. <br>
+<br>
+-->
