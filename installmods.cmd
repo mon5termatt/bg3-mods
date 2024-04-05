@@ -3,9 +3,9 @@ setlocal enabledelayedexpansion
 mode con:cols=100 lines=40 
 
 ::these change whenever the game or script updates
-set localver=0003
+set localver=0004
 ::built for game version
-set gamever=4.1.1.4905117
+set gamever=4.1.1.5009956
 
 ::in case anything changes leave this as a variable.
 set "targetFolder=SteamLibrary\steamapps\common\Baldurs Gate 3"
@@ -25,12 +25,12 @@ del curver.ini /Q
 cls
 call :logo
 if "%localver%" EQU "%remver%" (
-echo.[42mScript is up to date[0m
+echo.[92mScript is up to date[0m
 echo.
 goto startup
 )
 if "%localver%" GEQ "%remver%" (
-echo.[43mScript is running a version newer then on the github[0m
+echo.[93mScript is running a version newer then on the github[0m
 echo.
 goto startup
 )
@@ -54,12 +54,12 @@ goto manual)
 
 ::for the normies that dont have multiple drives
 if exist "%programfiles(x86)%\Steam\steamapps\common\Baldurs Gate 3\" (
-	echo.[42mFound at "%programfiles(x86)%\Steam\steamapps\common\Baldurs Gate 3"[0m
+	echo.[92mFound at "%programfiles(x86)%\Steam\steamapps\common\Baldurs Gate 3"[0m
 	set "gamepath=C:\Program Files (x86)\Steam\steamapps\common\Baldurs Gate 3"
 	goto :end_loop
 )
 if exist "%programfiles%\Steam\steamapps\common\Baldurs Gate 3\" (
-	echo.[42mFound at "%programfiles%\Steam\steamapps\common\Baldurs Gate 3"[0m
+	echo.[92mFound at "%programfiles%\Steam\steamapps\common\Baldurs Gate 3"[0m
 	set "gamepath=C:\Program Files\Steam\steamapps\common\Baldurs Gate 3"
 	goto :end_loop
 )
@@ -68,7 +68,7 @@ if exist "%programfiles%\Steam\steamapps\common\Baldurs Gate 3\" (
 for %%I in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
     set "drive=%%I:"
     if exist "!drive!\%targetFolder%\" (
-        echo [42mFound at !drive!\%targetFolder%[0m
+        echo [92mFound at !drive!\%targetFolder%[0m
         set "gamepath=!drive!\%targetFolder%"
         goto :end_loop
     )
@@ -78,7 +78,7 @@ for %%I in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
 for %%I in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do (
     set "drive=%%I:"
     if exist "!drive!\%GOGFolder%\" (
-        echo [42mFound at !drive!\%GOGFolder%[0m
+        echo [92mFound at !drive!\%GOGFolder%[0m
         set "gamepath=!drive!\%GOGFolder%"
         goto :end_loop
     )
@@ -135,19 +135,19 @@ powershell "(Get-Item -path .\bin\bg3_dx11.exe.backup).VersionInfo.ProductVersio
 set /p bg3bak2=<tmp
 ) else (set /a bg3bak2=0)
 echo.
-echo.[44mBackup versions  = %bg3bak1% - %bg3bak2%[0m
-echo.[44mCurrent versions = %bg3cur1% - %bg3cur2%[0m
+echo.[94mBackup versions  = %bg3bak1% - %bg3bak2%[0m
+echo.[94mCurrent versions = %bg3cur1% - %bg3cur2%[0m
 echo.
 
 if %bg3cur1% NEQ %gamever% (
-echo.[41mThis script was built for game version[44m %gamever%[41m
+echo.[41mThis script was built for game version[94m %gamever%[41m
 echo.Your current game version is not compatable with this build.
 echo.Please confirm that you have updated via Steam/GOG
 echo.if this persists you may need to verify your game files.[0m
 )
 if %bg3cur1% EQU %bg3bak1% (
 set mismatch=false
-echo.[42mBackup versions match.[0m
+echo.[92mBackup versions match.[0m
 ) else (
 if exist ".\bin\bg3.exe.backup" (
 echo.[41mBackup versions mismatch. was there a recent update?
@@ -168,12 +168,11 @@ if "%1" == "3" (goto remove)
 
 :menu
 echo.[?25l
-
+ECHO.1 - INSTALL
+Echo.2 - REINSTALL/UPDATE
+Echo.3 - UNINSTALL
 echo.
-ECHO.    [1] [92mINSTALL[37m
-Echo.    [2] REINSTALL/UPDATE
-Echo.    [3] UNINSTALL
-Set /P _num="    choose dammit:"
+Set /P _num="Select 1-3:"
 If /i "%_num%"=="1" goto:install
 If /i "%_num%"=="2" goto:update
 If /i "%_num%"=="3" goto:remove
