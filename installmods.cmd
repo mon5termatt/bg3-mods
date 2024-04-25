@@ -191,7 +191,7 @@ powershell -command "Expand-Archive -Force '%gamepath%\files.zip' '%gamepath%'"
 del files.zip
 
 
-move ".\appdata\ShowApprovalRatings - English.pak" "%localappdata%\Larian Studios\Baldur's Gate 3\Mods"
+move ".\appdata\Show Approval Ratings - English.pak" "%localappdata%\Larian Studios\Baldur's Gate 3\Mods"
 move ".\appdata\NoRomanceLimit.pak" "%localappdata%\Larian Studios\Baldur's Gate 3\Mods"
 move ".\appdata\modsettings.lsx" "%localappdata%\Larian Studios\Baldur's Gate 3\PlayerProfiles\Public"
 
@@ -226,14 +226,10 @@ goto exit
 
 
 :remove
-echo.
-echo Removing - Party Limit Begone
-rmdir /Q /S .\Data\Mods
+echo Removing Mods
+rmdir /Q /S %gamepath%\Data\Mods
 mkdir .\Data\Mods
-echo.
-echo Removing - Show Approval Ratings \ Limits
-del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\ShowApprovalRatings - English.pak"
-del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\NoRomanceLimit.pak"
+del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\*"
 del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\PlayerProfiles\Public\modsettings.lsx"
 echo.
 
@@ -248,11 +244,6 @@ echo.backups do however exist.
 goto opt1
 ) else (
 goto opt3)
-
-
-
-
-
 
 
 :: option 1 - just remove files
@@ -277,16 +268,6 @@ goto remscriptextender
 echo.Backup not found, Not restoring
 echo.
 goto remscriptextender
-
-
-
-
-
-
-
-
-
-
 
 
 
