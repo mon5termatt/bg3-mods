@@ -3,9 +3,9 @@ setlocal enabledelayedexpansion
 mode con:cols=100 lines=40 
 
 ::these change whenever the game or script updates
-set localver=0004
+set localver=0005
 ::built for game version
-set gamever=4.1.1.5009956
+set gamever=4.1.1.5022896
 
 ::in case anything changes leave this as a variable.
 set "targetFolder=SteamLibrary\steamapps\common\Baldurs Gate 3"
