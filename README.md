@@ -1,5 +1,8 @@
 # bg3-mods
 
+<i>I mean thank god we are getting official mod support, but it broke this.....</i>
+
+
 #### if you arent my d&d/bg3 group, i aint helping you with this script.
 
 ![Logo](docs/meme.jpeg)
