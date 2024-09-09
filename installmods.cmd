@@ -121,8 +121,6 @@ set error2=true)
 
 @REM This is looking for "backups" With patch 7 this isnt needed anymore due to a different mod which no longer requires patching the EXE's
 
-@REM ONLY RUN FOR PATCH 6
-if %bg3cur1% EQU %p6% (
 
 if exist ".\bin\bg3.exe.backup" (
 powershell "(Get-Item -path .\bin\bg3.exe.backup).VersionInfo.ProductVersion">tmp 
@@ -132,8 +130,6 @@ if exist ".\bin\bg3_dx11.exe.backup" (
 powershell "(Get-Item -path .\bin\bg3_dx11.exe.backup).VersionInfo.ProductVersion">tmp
 set /p bg3bak2=<tmp
 ) else (set /a bg3bak2=0)
-
-)
 
 if "%error1%" EQU "true" (
 echo.[41mCould not find BG3 EXE, this is crucial for running the game.[0m
@@ -162,13 +158,14 @@ if %bg3cur1% NEQ %bg3bak1% (set mismatch=true)
 echo.
 if %bg3cur1% EQU %p7% (
 echo.[31mTHIS SCRIPT IS NOT COMPATABLE WITH PATCH 7 YET.
+pause
 echo.NOW LAUNCHING INSTRUCTIONS ON HOW TO DOWNGRADE.
 explorer "https://www.dexerto.com/baldurs-gate/larian-lets-you-stay-on-baldurs-gate-3-patch-6-to-avoid-breaking-mods-2890361/"
 echo. hit any key to remove the mods for patch 7.
 pause >nul
 echo.[0m
-goto remove)
-
+goto p7rem
+)
 if %bg3cur1% EQU %p6% (
 echo.[92mCONGRATS, YOU ARE ON PATCH 6. YOU CAN USE THIS SCRIPT![0m
 timeout 2 >nul)
@@ -176,7 +173,8 @@ timeout 2 >nul)
 
 
 
-::pass in a variable from the console to automatically select 
+@REM pass in a variable from the console to automatically select 
+@REM 
 if "%1" == "1" (goto install)
 if "%1" == "2" (goto update)
 if "%1" == "3" (goto remove)
@@ -190,11 +188,10 @@ Set /P _num="Select 1-3:"
 If /i "%_num%"=="1" goto:install
 If /i "%_num%"=="2" goto:update
 If /i "%_num%"=="3" goto:remove
-
-
-
 cls
+call :logo
 goto menu
+
 
 :UPDATE
 set update=true
@@ -311,6 +308,18 @@ goto install
 goto exit)
 
 
+:p7rem
+
+@REM DONT TRY AND DELETE THE NEW .EXE FILES FROM THE P7 UPDATE
+
+del /Q /S %gamepath%\Data\Mods\GustavDev\meta.lsx
+del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\Show Approval Ratings - English.pak"
+del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\Mods\NoRomanceLimit.pak"
+del /Q "%localappdata%\Larian Studios\Baldur's Gate 3\PlayerProfiles\Public\modsettings.lsx"
+del /Q .\bin\bg3.exe.backup
+del /Q .\bin\bg3_dx11.exe.backup
+del /Q .\bin\DWrite.dll
+del /Q .\bin\ScriptExtenderSettings.json
 
 @REM PRETTY GRAPHICS :)
 :exit
